@@ -9,7 +9,9 @@
 int main(int argc, char **argv) {
     std::vector<int> val{8, 13, 21, 34, 55};
     // TODO: 调用 `std::transform`，将 `v` 中的每个元素乘以 2，并转换为字符串，存入 `ans`
-    // std::vector<std::string> ans
+    std::vector<std::string> ans;
+    // 得使用std::inserter不然会段错误，因为一开始ans没有分配内存
+    std::transform(val.begin(), val.end(), std::back_inserter(ans),[](int val){return std::to_string(val * 2);}); 
     ASSERT(ans.size() == val.size(), "ans size should be equal to val size");
     ASSERT(ans[0] == "16", "ans[0] should be 16");
     ASSERT(ans[1] == "26", "ans[1] should be 26");
